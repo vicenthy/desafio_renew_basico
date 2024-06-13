@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ryc_desafio_do_modulo_basico/service_locator.dart';
+import 'package:ryc_desafio_do_modulo_basico/core/service_locator.dart';
 import 'package:ryc_desafio_do_modulo_basico/view/pages/home.page.dart';
 
 void main() {

@@ -1,4 +1,6 @@
-class TaskModel{
+import 'package:ryc_desafio_do_modulo_basico/core/models/base.model.dart';
+
+class TaskModel extends BaseModel{
   final String title;
   final String description;
   final DateTime taskDate;

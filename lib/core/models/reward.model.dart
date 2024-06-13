@@ -1,4 +1,6 @@
-class RewardModel{
+import 'package:ryc_desafio_do_modulo_basico/core/models/base.model.dart';
+
+class RewardModel extends BaseModel{
   final String title;
   final String description;
   final String imageUrl;
