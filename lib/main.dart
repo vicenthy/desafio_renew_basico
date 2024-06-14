@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:ryc_desafio_do_modulo_basico/core/service_locator.dart';
 import 'package:ryc_desafio_do_modulo_basico/view/pages/home.page.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await setup();
   runApp(const MyApp());
 }
 
@@ -21,7 +23,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          home: const HomePage(),
+          home: HomePage(),
         );
       }
     );

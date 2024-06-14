@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:ryc_desafio_do_modulo_basico/actions/home.actions.dart';
+import 'package:ryc_desafio_do_modulo_basico/core/service_locator.dart';
 import 'package:ryc_desafio_do_modulo_basico/view/components/app_bar.componet.dart';
 import 'package:ryc_desafio_do_modulo_basico/view/components/footer.component.dart';
-import 'package:ryc_desafio_do_modulo_basico/view/components/main-content.content.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class HomePage extends StatefulWidget {
+
+  HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+final _state = getIt.get<HomeActions>();
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +26,11 @@ class HomePage extends StatelessWidget {
         ),
         body: SingleChildScrollView(
           physics: ScrollPhysics(),
-          child: MainContentComponent(),
+          child: ValueListenableBuilder(
+            valueListenable: _state, 
+            builder: (BuildContext context, value, _){
+              return value.selectPage(value.index);
+            }),
         ),
         bottomNavigationBar: CustomFooterComponent(),
       ),

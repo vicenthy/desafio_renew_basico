@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:ryc_desafio_do_modulo_basico/actions/home.actions.dart';
+import 'package:ryc_desafio_do_modulo_basico/core/service_locator.dart';
+import 'package:ryc_desafio_do_modulo_basico/state/home_state.dart';
 
 class CustomFooterComponent extends StatelessWidget {
-  const CustomFooterComponent({super.key});
+  CustomFooterComponent({super.key});
+  final _state = getIt.get<HomeActions>();
+
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +29,11 @@ class CustomFooterComponent extends StatelessWidget {
                 ),
                 label: "Information")
           ],
+          onTap: (index){
+            if(index == 0){
+                _state.selectPage(NavPage.Home.index);
+            }
+          },
         );
     }
 }

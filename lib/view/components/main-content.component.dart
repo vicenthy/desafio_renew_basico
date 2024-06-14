@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:ryc_desafio_do_modulo_basico/actions/home.actions.dart';
+import 'package:ryc_desafio_do_modulo_basico/core/service_locator.dart';
+import 'package:ryc_desafio_do_modulo_basico/state/home_state.dart';
 
 class MainContentComponent extends StatefulWidget {
-  const MainContentComponent({super.key});
+  MainContentComponent({super.key});
 
   @override
   State<MainContentComponent> createState() => _MainContentComponentState();
 }
 
 class _MainContentComponentState extends State<MainContentComponent> {
+final _state = getIt.get<HomeActions>();
+final titleTextController = TextEditingController( text: "");
+
+
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -20,6 +28,7 @@ class _MainContentComponentState extends State<MainContentComponent> {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: TextField(
+                          controller: titleTextController,
                           decoration: InputDecoration(
                             labelText: 'test',
                             border: const OutlineInputBorder(
@@ -32,7 +41,9 @@ class _MainContentComponentState extends State<MainContentComponent> {
                     ),
                     IconButton(
                       padding: EdgeInsets.all(0),
-                      onPressed: () {},
+                      onPressed: () {
+                        _state.selectPageWithTitle(NavPage.Register.index, titleTextController.text);
+                      },
                       icon: Icon(
                         Icons.add,
                       ),
