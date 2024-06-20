@@ -6,15 +6,64 @@ class RegisterContentComponent extends StatefulWidget {
   RegisterContentComponent({super.key});
 
   @override
-  State<RegisterContentComponent> createState() => _RegisterContentComponentState();
+  State<RegisterContentComponent> createState() =>
+      _RegisterContentComponentState();
 }
 
 class _RegisterContentComponentState extends State<RegisterContentComponent> {
-final _state = getIt.get<HomeActions>();
+  final _state = getIt.get<HomeActions>();
+  final registerFormKey = GlobalKey();
+  final textTitleController = TextEditingController( text: '');
+    final textDescriptionController = TextEditingController( text: '');
+
+@override
+  void initState() {
+    textTitleController.text = _state.value.taskModel.title;
+    // TODO: implement initState
+    super.initState();
+  }
 
 
   @override
   Widget build(BuildContext context) {
-    return Text(_state.value.title);
+    return Form(
+      key: registerFormKey,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            TextField(
+              controller: textTitleController,
+              decoration: InputDecoration(
+                labelText: 'Title',
+                border: const OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.purple, width: 1.0),
+                ),
+              ),
+            ),
+            TextField(
+              decoration: InputDecoration(
+                labelText: 'Description',
+                border: const OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.purple, width: 1.0),
+                ),
+              ),
+            ),
+            TextField(
+              decoration: InputDecoration(
+                labelText: 'Date',
+                border: const OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.purple, width: 1.0),
+                ),
+              ),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.save),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
