@@ -1,5 +1,5 @@
 abstract class BaseModel{
-  final String?  id;
+  String?  id;
 
   BaseModel({this.id});
 }

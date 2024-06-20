@@ -11,11 +11,12 @@ class StorageService {
 
   initdb(String table) {
     _table = table;
+    print("init db ${table}");
     _load();
   }
 
-  Future<void> save(dynamic item) async {
-    item.id = const UuidV7().generate();
+  Future<void> save(Map<String, dynamic> item) async {
+    item['id'] = const UuidV7().generate();
     _colletion.add(item);
     _sync(_colletion);
   }
@@ -57,6 +58,7 @@ class StorageService {
     String? data = _storage.getString(_table);
     if (data != null) {
       _colletion = jsonDecode(data);
+      return;
     }
     _colletion = List.empty(growable: true);
   }

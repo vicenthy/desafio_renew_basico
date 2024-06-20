@@ -10,12 +10,12 @@ GenericRepository(){
   _storageService.initdb(table);
 }
 
-save(T item) {
+save(Map<String, dynamic> item) {
   _storageService.save(item);
 }
 
-update(T item) {
-  _storageService.update("${item.id}",  item);
+update(Map<String, dynamic> item) {
+  _storageService.update("${item['id']}",  item);
 }
 
 delete(String id) {

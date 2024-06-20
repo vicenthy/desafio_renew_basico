@@ -58,7 +58,9 @@ class _RegisterContentComponentState extends State<RegisterContentComponent> {
               ),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                _state.saveTask(_state.value.taskModel);
+              },
               icon: Icon(Icons.save),
             ),
           ],
