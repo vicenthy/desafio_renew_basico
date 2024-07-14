@@ -10,14 +10,14 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: getIt.allReady(),
       builder: (context, snapshot) {
-        return MaterialApp(
+        if(snapshot.connectionState == ConnectionState.done){
+          return MaterialApp(
           title: 'Flutter Demo',
           theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
@@ -25,6 +25,10 @@ class MyApp extends StatelessWidget {
           ),
           home: HomePage(),
         );
+        }else{
+          return const CircularProgressIndicator();
+        }
+        
       }
     );
   }

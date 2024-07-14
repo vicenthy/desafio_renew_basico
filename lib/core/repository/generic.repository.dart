@@ -1,37 +1,35 @@
-import 'package:ryc_desafio_do_modulo_basico/core/models/base.model.dart';
 import 'package:ryc_desafio_do_modulo_basico/core/service/storage.service.dart';
-import 'package:ryc_desafio_do_modulo_basico/core/service_locator.dart';
 
-abstract class  GenericRepository<T extends BaseModel> {
-final StorageService _storageService = getIt.get<StorageService>();
+abstract class  GenericRepository {
+StorageService get storageService;
 String get table;
 
 GenericRepository(){
-  _storageService.initdb(table);
+  storageService.initdb(table);
 }
 
 save(Map<String, dynamic> item) {
-  _storageService.save(item);
+  storageService.save(item);
 }
 
 update(Map<String, dynamic> item) {
-  _storageService.update("${item['id']}",  item);
+  storageService.update("${item['id']}",  item);
 }
 
 delete(String id) {
-  _storageService.delete(id);
+  storageService.delete(id);
 }
 
-T findById(String id){
-  return _storageService.findById(id);
+findById(String id){
+  return storageService.findById(id);
 }
 
-List<T> findAll(){
-  return _storageService.findAll();
+List findAll(){
+  return storageService.findAll();
 }
 
-List<T> findWhere(bool Function(dynamic) filter){
-  return _storageService.findWhere(filter);
+List findWhere(bool Function(dynamic) filter){
+  return storageService.findWhere(filter);
 }
 
 

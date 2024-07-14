@@ -14,7 +14,7 @@ class CustomFooterComponent extends StatelessWidget {
     
     BottomNavigationBar(
           backgroundColor: Colors.purple,
-          items: [
+          items: const [
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.favorite,
@@ -27,11 +27,13 @@ class CustomFooterComponent extends StatelessWidget {
                   Icons.shopping_bag,
                   color: Colors.white,
                 ),
-                label: "Information")
+                label: "Reward")
           ],
           onTap: (index){
             if(index == 0){
                 _state.selectPage(NavPage.Home.index);
+            }if(index == 1){
+                _state.selectPage(NavPage.Reward.index);
             }
           },
         );

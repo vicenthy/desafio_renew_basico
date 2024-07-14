@@ -1,12 +1,17 @@
 import 'package:ryc_desafio_do_modulo_basico/core/models/base.model.dart';
 
-class TaskModel extends BaseModel{
+class TaskModel extends BaseModel {
   final String title;
   final String description;
   final DateTime taskDate;
   final String status;
 
-  TaskModel({id, required this.title, required this.description, required this.taskDate, required this.status});
+  TaskModel(
+      {super.id,
+      required this.title,
+      required this.description,
+      required this.taskDate,
+      required this.status});
 
   Map<String, dynamic> toJson() {
     return {
@@ -18,8 +23,7 @@ class TaskModel extends BaseModel{
     };
   }
 
-
-    factory TaskModel.fromJson(Map<String, dynamic> json) {
+  factory TaskModel.fromJson(Map<String, dynamic> json) {
     return TaskModel(
       id: json['id'],
       title: json['title'],
@@ -28,4 +32,21 @@ class TaskModel extends BaseModel{
       status: json['status'],
     );
   }
+
+  TaskModel copyWith({
+    String? id,
+    String? title,
+    String? description,
+    DateTime? taskDate,
+    String? status,
+  }) {
+    return TaskModel(
+        id: id ?? this.id,
+        title: title ?? this.title,
+        description: description ?? this.description,
+        taskDate: taskDate ?? this.taskDate,
+        status: status ?? this.status);
+  }
+
+
 }

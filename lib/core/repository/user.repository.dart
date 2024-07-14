@@ -1,8 +1,10 @@
-import 'package:ryc_desafio_do_modulo_basico/core/models/user.model.dart';
 import 'package:ryc_desafio_do_modulo_basico/core/repository/generic.repository.dart';
+import 'package:ryc_desafio_do_modulo_basico/core/service/storage.service.dart';
+import 'package:ryc_desafio_do_modulo_basico/core/service_locator.dart';
+class  UserRepository extends GenericRepository{
 
-class  UserRepository extends GenericRepository<UserModel>{
-
+@override
+final  storageService = getIt.get<StorageService>(instanceName: '_user');
 @override
 final String table = "_user";
 

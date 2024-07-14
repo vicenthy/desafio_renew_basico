@@ -15,6 +15,13 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 final _state = getIt.get<HomeActions>();
 
+
+@override
+  void initState() {
+    _state.load();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -22,16 +29,14 @@ final _state = getIt.get<HomeActions>();
         appBar: AppBar(
           backgroundColor: Colors.purple,
           toolbarHeight: 130,
-          flexibleSpace: CustomAppBarComponent(),
+          flexibleSpace: const CustomAppBarComponent(),
         ),
-        body: SingleChildScrollView(
-          physics: ScrollPhysics(),
-          child: ValueListenableBuilder(
+        body: ValueListenableBuilder(
             valueListenable: _state, 
             builder: (BuildContext context, value, _){
               return value.selectPage(value.index);
+              
             }),
-        ),
         bottomNavigationBar: CustomFooterComponent(),
       ),
     );

@@ -1,56 +1,65 @@
 import 'package:flutter/material.dart';
+import 'package:ryc_desafio_do_modulo_basico/actions/reward.actions.dart';
+import 'package:ryc_desafio_do_modulo_basico/core/service_locator.dart';
 
-class CustomAppBarComponent extends StatelessWidget {
+class CustomAppBarComponent extends StatefulWidget {
   const CustomAppBarComponent({
     super.key,
   });
 
   @override
+  State<CustomAppBarComponent> createState() => _CustomAppBarComponentState();
+}
+
+class _CustomAppBarComponentState extends State<CustomAppBarComponent> {
+final _state = getIt.get<RewardActions>();
+
+
+
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
+    return ValueListenableBuilder(valueListenable: _state, builder: (context, value, _) {
+      return Container(
       padding: const EdgeInsets.all(10),
-      child: Column(
-        children: [
+      child:  Column(
+        children:  [
           Row(
             children: [
-              SizedBox(
+              Container(
+                padding: const EdgeInsets.all(8.0),
                 height: 70,
                 width: 70,
-                child: CircleAvatar(
+                child: const CircleAvatar(
                   child: Icon(
                     Icons.person,
                   ),
                 ),
               ),
-              Icon(
+              Row(
+                children: value.userModel.lifes.map( (value){
+                  return Icon(
                 Icons.favorite,
-                color: Colors.red,
-              ),
-              Icon(
-                Icons.favorite,
-              ),
-              Icon(
-                Icons.favorite,
-              ),
-              Icon(
-                Icons.favorite,
-              ),
-              Icon(
-                Icons.favorite,
+                color: value ? Colors.red : Colors.grey,
+              );
+                }).toList(),
               ),
             ],
           ),
           Row(
             children: [
-              Icon(Icons.fort),
+              const Icon(Icons.fort),
+              const SizedBox(width: 10,),
               Text(
-                "10 coins",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+                "${value.userModel.coins} coins",
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
               )
             ],
           )
         ],
       ),
     );
+
+    });
   }
 }

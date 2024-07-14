@@ -6,7 +6,7 @@ import 'package:uuid/v7.dart';
 
 class StorageService {
   final _storage = getIt.get<SharedPreferences>();
-  List<Map<String,dynamic>> _colletion = List.empty(growable: true);
+  List<dynamic> _colletion = List.empty(growable: true);
   late String _table;
 
   initdb(String table) {
