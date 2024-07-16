@@ -21,17 +21,18 @@ final _state = getIt.get<RewardActions>();
   Widget build(BuildContext context) {
     return ValueListenableBuilder(valueListenable: _state, builder: (context, value, _) {
       return Container(
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(5),
       child:  Column(
         children:  [
           Row(
             children: [
               Container(
                 padding: const EdgeInsets.all(8.0),
-                height: 70,
-                width: 70,
+                height: 80,
+                width: 80,
                 child: const CircleAvatar(
                   child: Icon(
+                    size: 60,
                     Icons.person,
                   ),
                 ),
@@ -39,6 +40,7 @@ final _state = getIt.get<RewardActions>();
               Row(
                 children: value.userModel.lifes.map( (value){
                   return Icon(
+                    size: 50,
                 Icons.favorite,
                 color: value ? Colors.red : Colors.grey,
               );
@@ -48,11 +50,12 @@ final _state = getIt.get<RewardActions>();
           ),
           Row(
             children: [
-              const Icon(Icons.fort),
+              const SizedBox(width: 90,),
+              const Icon(Icons.fort, color: Colors.amber,),
               const SizedBox(width: 10,),
               Text(
                 "${value.userModel.coins} coins",
-                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               )
             ],
           )
