@@ -29,7 +29,7 @@ class UserModel extends BaseModel {
       id: json['id'],
       name: json['name'],
       imageUrl: json['imageUrl'],
-      lifes: json['lifes'],
+      lifes: List<bool>.from(json['lifes']),
       coins: json['coins'],
     );
   }

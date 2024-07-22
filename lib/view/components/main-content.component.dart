@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ryc_desafio_do_modulo_basico/actions/home.actions.dart';
-import 'package:ryc_desafio_do_modulo_basico/core/models/task.model.dart';
-import 'package:ryc_desafio_do_modulo_basico/core/repository/task.repository.dart';
+import 'package:ryc_desafio_do_modulo_basico/actions/reward.actions.dart';
 import 'package:ryc_desafio_do_modulo_basico/core/service_locator.dart';
 import 'package:ryc_desafio_do_modulo_basico/state/home_state.dart';
 
@@ -14,13 +13,18 @@ class MainContentComponent extends StatefulWidget {
 
 class _MainContentComponentState extends State<MainContentComponent> {
   final _state = getIt.get<HomeActions>();
-  final _taskRepository = getIt.get<TaskRepository>();
+  final _rewardState = getIt.get<RewardActions>();
   final titleTextController = TextEditingController(text: "");
 
   @override
   void initState() {
+    Future.microtask( () => {
+      _rewardState.load()
+    });
+    // TODO: implement initState
     super.initState();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +89,7 @@ class _MainContentComponentState extends State<MainContentComponent> {
                                     bottomLeft: Radius.circular(12),
                                     topLeft: Radius.circular(12),
                                   ),
-                                  side: BorderSide(color: daysDueDate > 0 ? Colors.greenAccent : Colors.red )),
+                                  side: BorderSide(color: (daysDueDate > 0 || item.status == 'DONE') ? Colors.greenAccent : Colors.red )),
                               leading: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -130,10 +134,10 @@ class _MainContentComponentState extends State<MainContentComponent> {
                                 ],
                               ),
                               trailing: InkWell(
-                                onTap: () {
+                                onTap: item.status != 'DONE' ? () {
                                   _state.updateStatus(item.id!);
                                   _state.load();
-                                },
+                                } : null,
                                 child: Container(
                                   decoration: BoxDecoration(
                                     color: item.status == 'DONE'

@@ -15,6 +15,8 @@ class _RewardContentComponentState extends State<RewardContentComponent> {
   final _state = getIt.get<RewardActions>();
   final _userRepository = getIt.get<UserRepository>();
 
+
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -41,7 +43,7 @@ class _RewardContentComponentState extends State<RewardContentComponent> {
                     style: TextStyle(fontSize: 25),
                   ),
                   IconButton(
-                    onPressed: () async {
+                    onPressed: _state.value.userModel.coins > 0 ? () async {
                       final result = await showDialog(
                         context: context,
                         builder: (BuildContext context) {
@@ -49,13 +51,10 @@ class _RewardContentComponentState extends State<RewardContentComponent> {
                         },
                       );
                       if (result) {
-                        final coins = _state.value.userModel.coins;
-                        final userEdit =
-                            _state.value.userModel.copyWith(coins: coins - 5);
-                        _userRepository.save(userEdit.toJson());
-                        print(userEdit.toJson());
+                        _state.save();
+                        setState(() {});
                       }
-                    },
+                    } : null,
                     icon: Icon(Icons.shopping_cart),
                     iconSize: 50,
                   )

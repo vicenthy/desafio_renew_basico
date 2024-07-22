@@ -53,9 +53,7 @@ final _state = getIt.get<RewardActions>();
               const SizedBox(width: 90,),
               const Icon(Icons.fort, color: Colors.amber,),
               const SizedBox(width: 10,),
-              Text(
-                "${value.userModel.coins} coins",
-                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              Text("${value.userModel.coins} coins", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               )
             ],
           )

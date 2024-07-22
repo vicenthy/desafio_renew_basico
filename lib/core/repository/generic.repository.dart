@@ -32,5 +32,4 @@ List findWhere(bool Function(dynamic) filter){
   return storageService.findWhere(filter);
 }
 
-
 }

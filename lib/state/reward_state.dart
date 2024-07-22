@@ -7,6 +7,6 @@ class RewardState {
 
   factory RewardState.init() {
     return RewardState(
-        userModel: UserModel(name: 'current', lifes: List.filled(5, true), coins: 10));
+        userModel: UserModel(name: 'current', lifes: List.filled(5, false), coins: 10));
   }
 }

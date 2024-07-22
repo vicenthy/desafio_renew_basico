@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ryc_desafio_do_modulo_basico/actions/reward.actions.dart';
 import 'package:ryc_desafio_do_modulo_basico/core/models/task.model.dart';
 import 'package:ryc_desafio_do_modulo_basico/core/repository/task.repository.dart';
 import 'package:ryc_desafio_do_modulo_basico/core/service_locator.dart';
@@ -6,6 +7,8 @@ import 'package:ryc_desafio_do_modulo_basico/state/home_state.dart';
 
 class HomeActions extends ValueNotifier<HomeState> {
   final _taskRepository = getIt.get<TaskRepository>();
+  final _rewardState = getIt.get<RewardActions>();
+
 
   HomeActions()
       : super(HomeState(
@@ -55,11 +58,8 @@ class HomeActions extends ValueNotifier<HomeState> {
   updateStatus(String id) {
     TaskModel foundTask =  TaskModel.fromJson(_taskRepository.findById(id));
     TaskModel editTask;
-    if (foundTask.status == 'DONE') {
-      editTask = foundTask.copyWith(status: 'PENDING');
-    } else {
       editTask = foundTask.copyWith(status: 'DONE');
-    }
+      _rewardState.addCoin();
     _taskRepository.update(editTask.toJson());
   }
 }
